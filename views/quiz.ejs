@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quiz</title>
+        <link rel="stylesheet" href="../public/stylesheets/style.css">
+    </head>
+    <body>
+        <nav>
+            <img>
+            <h1>Quizzes</h1>
+            <ul>
+                <a><li>Restart</li></a>
+                <a><li>Leaderboard</li></a>
+            </ul>
+        </nav>
+
+        <div class="questionnaire">
+            <form action="/quiz" method="POST">
+                <h2>Question #?</h2>
+                <p id="Question"></p>
+                <label id="A" for="A">A</label>
+                <button id="A"></button>
+                <label id="B">B</label>
+                <button id="B"></button>
+                <label id="C">C</label>
+                <button id="C"></button>
+                <label id="D">D</label>
+                <button id="D"></button>
+                <br>
+                <button id="next">Next</button>
+            </form>
+        </div>
+        <footer>
+            <p>&copy;Signature. Some Rights are Reserved</p>
+        </footer>
+    </body>
+</html>
