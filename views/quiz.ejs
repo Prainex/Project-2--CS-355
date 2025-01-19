@@ -3,137 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivial Quiz</title>
-    <!-- <link rel="stylesheet" href="./style.css"> -->
-     <!-- GOOGLE FONTS -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Irish+Grover&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-     
-    <style>
-        *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    
-}
-
-body{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    background-color: #ADB3D2;
-    font-family: "Irish Grover", serif;
-    font-weight: 400;
-    font-style: normal;
-    height: 100%;
-    width: 100%;
-}
-
-.header{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-
-    /* background-color: rgb(33, 31, 31); */
-    color: black;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 2.5%;
-    padding-bottom: 2.5%;
-    margin-bottom: 50px;
-    width: 100%;
-}
-
-.container{
-    display: flex;
-    flex-direction: column;
-    padding-top: 2.5%;
-    padding-bottom: 2.5%;
-    padding-left: 6%;
-    padding-right: 6%;
-    border-radius: 3px;
-    color: white;
-    width: 60%;
-    margin-bottom: 80px;
-}
-
-.container > h1{
-    margin-bottom: 30px;
-    font-weight: 100;
-    font-size: 28px;
-}
-
-.option{
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
-    font-size: 20px;
-    background-color: #8f94ad;
-    padding-left: 3%;
-    padding-right: 3%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    border-radius: 5px;
-}
-
-.option:hover{
-    background-color: #CCD2AD;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-form > button{
-    height: 60px;
-    width: 150px;
-    background-color: #CCD2AD;
-    color: white;
-    font-size: 25px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 5px;
-    font-family: "Irish Grover", serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-form > button:hover {
-    background-color: #8f94ad;
-    color: beige;
-}
-
-
-.timer{
-    font-size: 48px;
-    color: orangered;
-    font-weight: bold;
-    padding: 20px;
-    border: 2px solid orangered;
-    border-radius: 6px;
-    background-color: white;
-    width: 150px;
-    text-align: center;
-}
-a{
-    text-decoration: none;
-}
-
-
-    </style>
+    <title>Document</title>
+    <link rel='stylesheet' href='/stylesheets/quiz.css' />
 </head>
 <body>
-    <a href="/"><div class="header">
-        <h1>Trivial Quiz</h1>
-        <div class="timer">#1</div>
+    <div class="header">
+        <h1>Question 1</h1>
+        <div class="timer">30</div>
     </div>
-    </a>
 
     <div class="container">
         <h1>This is a question?</h1>
@@ -154,11 +31,127 @@ a{
                 <input type="radio" id="optionD" name="answer" value="D">
                 <p>Option D</p>
             </label>
-            <button id="next-button">Next</button>
+            <button id="next-button" type="button">Next</button>
         </form>
-    </div>    
-    
-    <script src="./script.js"></script>
+    </div>
 
+    <div class="container-2">
+        <h1>Thanks for taking the quiz</h1>
+        <form action="/auth/login/submit/userOptions/quiz" method="POST">
+            <input id="result-btn" type="submit" value="View Result">
+        </form>        
+    </div>
+    
+    
+
+    <h1>Nothing goes here</h1>
+    
+    <script>
+        const questions = <%- JSON.stringify(questions) %>;
+        const time_limit = <%- time_limit %>;
+
+        let actual_answers = [];
+        questions.forEach((item) => {
+            actual_answers.push(item.answer);
+        });
+
+        let user_response = [];
+        let correct_response = [];
+
+        const questionElement = document.querySelector('.container > h1');
+        const options = document.querySelectorAll('.option input');  // Query input elements for options
+        const nextButton = document.getElementById('next-button');
+        const headerQuestion = document.querySelector('.header > h1');
+        const timerElement = document.querySelector('.timer');
+        document.querySelector('.container-2').style.display = 'none';
+
+        let currentQuestionIndex = 0;
+        let timeLeft = time_limit;
+        let timerInterval;
+
+        function updateTimerDisplay() {
+            timerElement.textContent = timeLeft;
+        }
+
+        function startTimer() {
+            timeLeft = time_limit;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.textContent = "0";
+                    nextQuestion();
+                } else {
+                    updateTimerDisplay();
+                }
+            }, 1000);
+        }
+
+        function recordResponse() {
+            let selectedOption = null;
+
+            options.forEach((option) => {
+                if (option.checked) {
+                    selectedOption = option.value; 
+                }
+            });
+
+            if (selectedOption === null) {
+                user_response.push("no answer"); 
+            } else {
+                user_response.push(selectedOption); 
+            }
+        }
+
+        function loadQuestion() {
+            let question = questions[currentQuestionIndex];
+            questionElement.textContent = question.question;
+            headerQuestion.textContent = `Question ${currentQuestionIndex + 1}`;
+
+            options[0].nextElementSibling.textContent = question.A;
+            options[1].nextElementSibling.textContent = question.B;
+            options[2].nextElementSibling.textContent = question.C;
+            options[3].nextElementSibling.textContent = question.D;
+
+            options.forEach((option) => {
+                option.checked = false;
+            });
+
+            startTimer();
+        }
+
+        function nextQuestion() {
+            recordResponse(); 
+
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } 
+            
+            else {
+                clearInterval(timerInterval);
+                document.querySelector('.container').style.display = 'none'; 
+                document.querySelector('.container-2').style.display = 'flex';
+                
+            }
+        }
+
+        nextButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            clearInterval(timerInterval);
+            nextQuestion();
+        });
+
+        document.getElementById('result-btn').addEventListener('click', () => {
+            window.location.href = '/results';
+        });
+
+
+        loadQuestion();
+    </script>
 </body>
 </html>
+

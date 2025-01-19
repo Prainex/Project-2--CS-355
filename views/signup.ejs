@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+
+<!-- Original -->
+
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <style>
@@ -52,6 +55,133 @@
                 <input type="submit" id="submitButton">
             </form>
             <h5>Have an account? <a href="/auth/login">Login</a></h5>
+        </div>
+    </body>
+</html> -->
+
+
+<!-- Suggested: -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/signup.css">
+        <title>Sign Up</title>
+        <style>
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;  
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(-225deg, #413e42 0%, #2f273a 48%, #191327 100%);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    background-color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: 20px 20px;
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.form_header {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 13px;
+}
+
+input {
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    height: 35px;
+    border: lightgrey 1px solid;
+}
+
+input[type="submit"] {
+    margin-top: 10px;
+    color: azure;
+    font-size: large;
+    height: 40px;
+    background-color: #6343e2;
+    border-radius: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #301b87;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+
+.footnote {
+    font-size: 10px;
+    text-align: center;
+    color: rgb(158, 155, 155);
+}
+
+.error-message {
+    background-color: #ffcccc;
+    color: #b30000;
+    border: 1px solid #b30000;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <form method="POST" action="/auth/signup/submit" class="signup_form">
+                <div class="form_header">
+                    <h1>Sign Up</h1>
+                    <p>Already have an account? <a href="/auth/login">Sign in</a></p>
+                </div>
+
+                <label for="name">Name</label>
+                <input id="name" type="text" name="name" required>
+
+                <% if (errorMessage) { %>
+                    <p style="color: red;"><%= errorMessage %></p>
+                <% } %>
+                
+
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username" required>
+
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" required>
+
+                <input type="submit" value="Sign Up">
+                <p class="footnote">
+                    By signing up to create an account, you are accepting our terms of service and privacy policy.
+                </p>
+            </form>
         </div>
     </body>
 </html>
