@@ -35,8 +35,9 @@ body{
 
 .header{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
+
     /* background-color: rgb(33, 31, 31); */
     color: black;
     padding-left: 10%;
@@ -120,15 +121,19 @@ form > button:hover {
     width: 150px;
     text-align: center;
 }
+a{
+    text-decoration: none;
+}
 
 
     </style>
 </head>
 <body>
-    <div class="header">
+    <a href="/"><div class="header">
         <h1>Trivial Quiz</h1>
         <div class="timer">#1</div>
     </div>
+    </a>
 
     <div class="container">
         <h1>This is a question?</h1>

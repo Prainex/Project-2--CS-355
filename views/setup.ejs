@@ -65,7 +65,7 @@
             background-color: #ccc;
             }
 
-            /* When the checkbox is checked, add a blue background */
+            /* When the checkbox is checked, add a green background */
             .container input:checked ~ .checkmark {
             background-color: #CCD2AD;
             }
@@ -132,18 +132,18 @@
                 font-weight: 400;
                 font-style: normal;
             }
-            a {
-                /* border: 1px solid #8f94ad; */
+            input[type=submit]:hover{
+                background-color: #8f94ad;
+
+            }
+            input[type=submit]{
                 padding: 10PX 50px;
                 border-radius: 20%;
                 background-color: #569aaf;
                 text-decoration: none;
                 color: black;
                 font-size: larger;
-            }
-            a:hover{
-                background-color: #8f94ad;
-
+                border:none;
             }
             
            
@@ -154,10 +154,10 @@
         <div class="head-box">
             <h1>TRIVIAL QUIZ</h1>
             <!-- <h2>Setup</h2> -->
-
-            <div class="selector-container">
+            <form action="/quiz" method="GET">
+                <div class="selector-container">
                 <label for="question-count">How many questions do you want?</label>
-                <select id="question-count">
+                <select name="question-count"id="question-count">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
@@ -167,15 +167,14 @@
 
             <div class="options">
                 <label class="container">TIMER
-                    <input type="checkbox" checked="checked">
+                    <input name="timer" type="checkbox" checked="checked">
                     <span class="checkmark"></span>
                   </label>
             </div>
 
-            <a class="links" href="/quiz">START QUIZ</a>
-
-            
-            
+            <!-- <a class="links" href="/quiz">START QUIZ</a> -->
+            <input value="START QUIZ" type="submit" class="links">
+            </form>
             
         </div>
     
