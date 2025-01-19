@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results Page</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <div class="container-1">
+        <h1>Results Page</h1>
+        <a href="#">Leaderboard</a>
+    </div>
+    <div class="container-2">
+        <div class="container-3">
+            <h2>Your Score: 42</h2>
+            <h2>Your current highest score: 45</h2>
+        </div>
+        <a href="#">Retake Quiz</a>
+    </div>
+    
+    <div class="container-4">
+        <h1>Check Solutions</h1>
+        <div id="qa-container">
+            <% questions.forEach((item) => { %>
+                <div class="question"><%= item.questions %></div>
+                <div class="answer"><%= item.answer %></div>
+            <% }); %>
+        </div>
+    </div>
+
+    <h1>Another one</h1>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const questions = document.querySelectorAll(".question");
+            const answers = document.querySelectorAll(".answer");
+
+            questions.forEach((question, index) => {
+                question.addEventListener("click", () => {
+                    answers[index].classList.toggle("show");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

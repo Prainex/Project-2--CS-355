@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Example</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container-1 {
+      padding: 20px 12%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .container-1 h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .rules {
+      margin: 40px auto;
+      padding: 20px;
+      width: 50%;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    form {
+      margin: 20px auto;
+      padding: 20px;
+      width: 50%;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    form input[type="number"], form input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    form input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    form input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    a{
+        color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Main Header and Navigation -->
+  <div class="container-1">
+    <h1>Welcome <%= specific_user.name %></h1>
+    <a href="#">Random</a>
+  </div>
+
+  <!-- Instructions Section -->
+  <div class="rules">
+    <h2>Instructions:</h2>
+    <br>
+    <p>1. <b>Select the number of questions:</b><br>
+    You must choose between 5 to 20 questions.</p>
+    <br>
+
+    <p>2. <b>Set the time limit per question:</b><br>
+    Choose a time limit between 10 and 50 seconds for each question.</p>
+    <br>
+  </div>
+
+  <!-- Form Section -->
+  <form method="post" action="/auth/login/submit/userOptions">
+    <label for="num-questions">How many questions</label>
+    <input type="number" id="num-questions" name="num_questions" min="5" max="20" placeholder="Enter between 5 to 20" required>
+
+    <label for="time-limit">Set time limit for each question (in seconds)</label>
+    <input type="number" id="time-limit" name="time_limit" min="10" max="50" placeholder="Enter time between 10 and 50" required>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
